@@ -1,117 +1,30 @@
-import 'package:awesome_counter_app/cubit/counter_cubit.dart';
+import 'package:awesome_counter_app/logic/cubit/counter_cubit.dart';
+import 'package:awesome_counter_app/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter _appRouter = AppRouter();
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CounterCubit>(
       create: (context) => CounterCubit(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Awesome Counter App',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              BlocConsumer<CounterCubit, CounterState>(
-                listener: (context, state) {
-                  if (state.isIncremented == true) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Incremented'),
-                        duration: Duration(microseconds: 300),
-                      ),
-                    );
-                  } else if (state.isIncremented == false) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Decremented'),
-                        duration: Duration(microseconds: 300),
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state.counterValue < 0) {
-                    return Text(
-                      'HMMM Negetive ${state.counterValue.toString()}',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  } else if (state.counterValue == 0) {
-                    return Text(
-                      'WOOW ${state.counterValue.toString()}',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  } else if (state.counterValue % 2 == 0) {
-                    return Text(
-                      'EVEN HUH ${state.counterValue.toString()}',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  } else {
-                    return Text(
-                      state.counterValue.toString(),
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  }
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    tooltip: 'Decrement',
-                    child: const Icon(Icons.remove),
-                  ),
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).increment();
-                    },
-                    tooltip: 'Increment',
-                    child: const Icon(Icons.add),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ));
   }
 }
