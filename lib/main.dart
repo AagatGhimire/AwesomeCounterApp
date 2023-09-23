@@ -1,5 +1,6 @@
 import 'package:awesome_counter_app/logic/cubit/counter_cubit.dart';
 import 'package:awesome_counter_app/logic/cubit/internet_cubit.dart';
+import 'package:awesome_counter_app/logic/cubit/settings_cubit.dart';
 import 'package:awesome_counter_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
+        ),
+        BlocProvider<SettingsCubit>(
+          create: (context) => SettingsCubit(),
         ),
       ],
       child: MaterialApp(

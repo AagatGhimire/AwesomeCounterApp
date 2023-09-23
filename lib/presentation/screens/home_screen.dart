@@ -35,6 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: widget.color,
           title: Text(widget.title),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings');
+              },
+              icon: const Icon(Icons.settings),
+            )
+          ],
         ),
         body: Center(
           child: Column(

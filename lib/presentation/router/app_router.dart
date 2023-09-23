@@ -1,5 +1,6 @@
 import 'package:awesome_counter_app/presentation/screens/home_screen.dart';
 import 'package:awesome_counter_app/presentation/screens/second_screen.dart';
+import 'package:awesome_counter_app/presentation/screens/settings_screen.dart';
 import 'package:awesome_counter_app/presentation/screens/third_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,10 @@ class AppRouter {
             title: 'Third Screen',
             color: Colors.blue.shade100,
           ),
+        );
+      case '/settings':
+        return MaterialPageRoute(
+          builder: (_) => SettingsScreen(),
         );
       default:
         return null;
