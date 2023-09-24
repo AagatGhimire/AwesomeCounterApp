@@ -38,8 +38,10 @@ dependencies:
   flutter_bloc: ^8.1.3
   bloc_test: ^9.1.4
   equatable: ^2.0.5
-  test_api: 
+  test_api: any
   connectivity_plus: ^4.0.2
+  hydrated_bloc: ^9.1.2
+  path_provider: ^2.1.1
   
 # dependency_overrides: 
 #   test_api: 0.4.18

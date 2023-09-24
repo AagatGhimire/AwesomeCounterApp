@@ -30,7 +30,7 @@ class AppRouter {
         );
       case '/settings':
         return MaterialPageRoute(
-          builder: (_) => SettingsScreen(),
+          builder: (_) => const SettingsScreen(),
         );
       default:
         return null;
